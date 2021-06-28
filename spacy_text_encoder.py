@@ -97,10 +97,6 @@ class SpacyTextEncoder(Executor):
         :param parameters: dictionary to define the `traversal_paths`. For example,
         `parameters={'traversal_paths': 'r'}` will override the `self.default_traversal_paths`
         """
-
-        def _tensor2array(tensor):
-            return tensor.cpu().numpy() if self.device == 'cuda' else tensor.numpy()
-
         if docs:
             trav_paths = parameters.get('traversal_paths', self.default_traversal_paths)
             # traverse thought all documents which have to be processed
@@ -109,5 +105,5 @@ class SpacyTextEncoder(Executor):
             filtered_docs = [doc for doc in flat_docs if doc.text is not None]
 
             for doc in filtered_docs:
-                processed_data = self.spacy_model(doc.text)
-                doc.embedding = np.array([_tensor2array(token.tensor) for token in processed_data])
+                spacy_doc = self.spacy_model(doc.text)
+                doc.embedding = spacy_doc.vector
