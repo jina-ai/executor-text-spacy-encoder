@@ -1,2 +1,5 @@
-jina[http]==2.0.0rc9
+jina[http]==2.0.0rc10
 pytest==6.2.4
+spacy==3.0.6
+torch==1.9.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0.tar.gz#egg=en_core_web_sm

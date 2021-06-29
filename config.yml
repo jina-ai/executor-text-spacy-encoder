@@ -1,4 +1,4 @@
-jtype: MyDummyExecutor
+jtype: SpacyTextEncoder
 metas:
   py_modules:
-    - MODULE_NAME.py
+    - spacy_text_encoder.py

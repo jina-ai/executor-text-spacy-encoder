@@ -4,18 +4,18 @@ __license__ = "Apache-2.0"
 import setuptools
 
 setuptools.setup(
-    name='jinahub-MY-DUMMY-EXECUTOR',
+    name='jinahub-spacy-text-encoder',
     version='1',
     author='Jina Dev Team',
     author_email='dev-team@jina.ai',
-    description='This is my dummy executor',
-    url='https://github.com/jina-ai/EXECUTOR_REPO_NAME',
+    description='This is a text encoder using models from Spacy',
+    url='https://github.com/jina-ai/executor-text-spacy-encoder',
     classifiers=[
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
     ],
-    py_modules=['jinahub.SUB_PACKAGE_NAME.MODULE_NAME'],
-    package_dir={'jinahub.SUB_PACKAGE_NAME': '.'},
+    py_modules=['jinahub.encoder.spacy_text_encoder'],
+    package_dir={'jinahub.encoder': '.'},
     install_requires=open('requirements.txt').readlines(),
     python_requires='>=3.7',
 )
