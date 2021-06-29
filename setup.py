@@ -14,8 +14,8 @@ setuptools.setup(
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
     ],
-    py_modules=['jinahub.encoder.text.spacy_text_encoder'],
-    package_dir={'jinahub.encoder.text': '.'},
+    py_modules=['jinahub.encoder.spacy_text_encoder'],
+    package_dir={'jinahub.encoder': '.'},
     install_requires=open('requirements.txt').readlines(),
     python_requires='>=3.7',
 )
