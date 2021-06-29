@@ -94,14 +94,16 @@ class SpacyTextEncoder(Executor):
         """
         Encode all docs with images and store the encodings in the embedding attribute of the docs.
         :param docs: documents sent to the encoder. The docs must have `text` as content
-        :param parameters: dictionary to define the `traversal_paths`. For example,
-        `parameters={'traversal_paths': 'r'}` will override the `self.default_traversal_paths`
+        :param parameters: dictionary to define the `traversal_path` and the `batch_size`.
+            For example,
+            `parameters={'traversal_paths': ['r']}`
+            will set the parameters for traversal_paths that is actually used`
         """
         if docs:
             trav_paths = parameters.get('traversal_paths', self.default_traversal_paths)
             # traverse thought all documents which have to be processed
             flat_docs = docs.traverse_flat(trav_paths)
-            # filter out documents without images
+            # filter out documents without text
             filtered_docs = [doc for doc in flat_docs if doc.text is not None]
 
             for doc in filtered_docs:
