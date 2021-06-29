@@ -8,7 +8,7 @@ setuptools.setup(
     version='1',
     author='Jina Dev Team',
     author_email='dev-team@jina.ai',
-    description='This is my dummy executor',
+    description='This is a text encoder using models from Spacy',
     url='https://github.com/jina-ai/executor-text-spacy-encoder',
     classifiers=[
         'Programming Language :: Python :: 3',
