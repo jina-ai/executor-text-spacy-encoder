@@ -92,7 +92,7 @@ class SpacyTextEncoder(Executor):
     @requests
     def encode(self, docs: Optional[DocumentArray], parameters: Dict, **kwargs):
         """
-        Encode all docs with images and store the encodings in the embedding attribute of the docs.
+        Encode all docs with text and store the encodings in the embedding attribute of the docs.
         :param docs: documents sent to the encoder. The docs must have `text` as content
         :param parameters: dictionary to define the `traversal_path` and the `batch_size`.
             For example,
