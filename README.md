@@ -69,7 +69,7 @@ pods:
 
 	```python
 	from jina import Flow
-	from jinahub.encoder.spacy_text_encoder import SpacyTextEncoder
+	from jinahub.encoder.text.spacy_text_encoder import SpacyTextEncoder
 	
 	f = Flow().add(uses=SpacyTextEncoder)
 	```
