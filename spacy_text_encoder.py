@@ -9,6 +9,7 @@ import spacy
 
 from jina import Executor, DocumentArray, requests
 from jina.logging.logger import JinaLogger
+from jina_commons.batching import get_docs_batch_generator
 
 
 class SpacyTextEncoder(Executor):
@@ -38,14 +39,14 @@ class SpacyTextEncoder(Executor):
     def __init__(self,
                  lang: str = 'en_core_web_sm',
                  use_default_encoder: bool = False,
-                 default_traversal_paths: List[str] = ['r'],
+                 default_traversal_paths: Optional[List[str]] = None,
                  device: Optional[str] = None,
                  *args, **kwargs):
         """Set constructor."""
         super().__init__(*args, **kwargs)
         self.lang = lang
         self.use_default_encoder = use_default_encoder
-        self.default_traversal_paths = default_traversal_paths
+        self.default_traversal_paths = default_traversal_paths or ['r']
         self.logger = JinaLogger(self.__class__.__name__)
         if not device:
             device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -100,12 +101,11 @@ class SpacyTextEncoder(Executor):
             will set the parameters for traversal_paths that is actually used`
         """
         if docs:
-            trav_paths = parameters.get('traversal_paths', self.default_traversal_paths)
-            # traverse thought all documents which have to be processed
-            flat_docs = docs.traverse_flat(trav_paths)
-            # filter out documents without text
-            filtered_docs = [doc for doc in flat_docs if doc.text is not None]
-
-            for doc in filtered_docs:
-                spacy_doc = self.spacy_model(doc.text)
-                doc.embedding = spacy_doc.vector
+            for doc_batch in get_docs_batch_generator(
+                docs,
+                traversal_path=parameters.get('traversal_paths', self.default_traversal_paths),
+                batch_size=1,
+                needs_attr='text'
+            ):
+                spacy_doc = self.spacy_model(doc_batch[0].text)
+                doc_batch[0].embedding = spacy_doc.vector
