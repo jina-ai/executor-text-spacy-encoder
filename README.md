@@ -1,3 +1,5 @@
+MOVED TO https://github.com/jina-ai/executors/tree/main/jinahub/encoders/text/SpacyTextEncoder
+
 # ✨ SpacyTextEncoder
 
 **SpacyTextEncoder** is a class that encodes text with spaCy models.
